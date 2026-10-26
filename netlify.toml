@@ -1,0 +1,6 @@
+[build]
+  command = "node build.js"
+  publish = "_site"
+  # 커밋 메시지에 [deploy] 가 있을 때만 배포합니다 (Netlify 무료 크레딧 절약).
+  # 뉴스레터(newsletter/issues/*.json)는 배포 없이 GitHub에서 바로 읽히므로 [deploy] 없이 커밋합니다.
+  ignore = "git log -1 --pretty=%B | grep -q '\\[deploy\\]' && exit 1 || exit 0"

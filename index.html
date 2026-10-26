@@ -185,6 +185,19 @@ footer { padding-block: 32px 48px; border-top: 1px solid var(--line); display: f
   .hero > *:nth-child(4) { animation-delay: .18s; }
   @keyframes rise { from { transform: translateY(8px); } to { transform: none; } }
 }
+
+/* 상담 신청 폼 */
+.consult-form { display: grid; gap: 16px; max-width: 720px; margin-top: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); padding: 24px; }
+.consult-form .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.consult-form .f-field { display: grid; gap: 6px; font: 500 14px/1.4 var(--font-body); color: var(--fg); }
+.consult-form .f-field b { color: var(--accent); font-weight: 700; }
+.consult-form input[type=text], .consult-form input[type=email], .consult-form select, .consult-form textarea { font: 400 15px/1.5 var(--font-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; box-sizing: border-box; }
+.consult-form textarea { resize: vertical; min-height: 140px; }
+.consult-form input:focus, .consult-form select:focus, .consult-form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.consult-form .f-agree { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.consult-form .f-agree input { margin-top: 3px; }
+.consult-form .actions { margin-top: 4px; }
+@media (max-width: 640px) { .consult-form .f-row { grid-template-columns: 1fr; } .consult-form { padding: 18px; } }
 </style>
 
 <div class="wrap">
@@ -380,11 +393,44 @@ footer { padding-block: 32px 48px; border-top: 1px solid var(--line); display: f
       <p class="title" id="contact-title">오늘, 경험 하나를 적어 보세요</p>
       <div class="prose">
         <p class="muted">지난 학기에 한 일 하나를 적고, 그 일이 어떤 직무와 닮았는지 생각해 보세요. 그 한 줄이 상담의 시작이 됩니다.</p>
-        <p class="muted">상담과 특강 문의는 한국기술교육대학교 IPP센터로 연락 주시면 됩니다.</p>
+        <p class="muted">아래 양식으로 상담을 신청하시면 남겨 주신 이메일로 회신드립니다. 진로 상담, IPP 현장실습, AI 진로설계, 특강 문의 모두 받습니다.</p>
       </div>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://www.koreatech.ac.kr/" target="_blank" rel="noopener">IPP센터 문의하기</a>
-      </div>
+      <form class="consult-form" name="consult" method="POST" action="/contact/thanks/" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="consult">
+        <p class="hp" hidden><label>비워 두세요 <input name="bot-field"></label></p>
+        <div class="f-row">
+          <label class="f-field"><span>이름 <b aria-hidden="true">*</b></span><input type="text" name="name" required autocomplete="name"></label>
+          <label class="f-field"><span>이메일 <b aria-hidden="true">*</b></span><input type="email" name="email" required autocomplete="email" placeholder="회신받을 주소"></label>
+        </div>
+        <div class="f-row">
+          <label class="f-field"><span>소속 (학교·학과·학년)</span><input type="text" name="affiliation" placeholder="예: 한국기술교육대 기계공학부 3학년"></label>
+          <label class="f-field"><span>상담 유형 <b aria-hidden="true">*</b></span>
+            <select name="type" required>
+              <option value="">선택해 주세요</option>
+              <option>진로 상담·미래설계</option>
+              <option>IPP 현장실습</option>
+              <option>AI 기반 진로설계</option>
+              <option>특강·교육 문의</option>
+              <option>기업 산학협력 문의</option>
+              <option>기타</option>
+            </select>
+          </label>
+        </div>
+        <label class="f-field"><span>희망 상담 방식</span>
+          <select name="mode">
+            <option>상관없음</option>
+            <option>대면</option>
+            <option>온라인(화상)</option>
+            <option>이메일</option>
+          </select>
+        </label>
+        <label class="f-field"><span>상담 내용 <b aria-hidden="true">*</b></span><textarea name="message" rows="6" required placeholder="지금 가진 전공과 경험, 고민을 편하게 적어 주세요. 완성된 계획이 없어도 괜찮습니다."></textarea></label>
+        <label class="f-agree"><input type="checkbox" name="privacy" value="동의" required> <span>개인정보 수집·이용에 동의합니다. (수집 항목: 이름, 이메일, 소속, 상담 내용 / 목적: 상담 신청 확인과 회신 / 보유 기간: 상담 종료 후 1년 이내 파기)</span></label>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">상담 신청 보내기</button>
+          <a class="btn btn-secondary" href="https://www.koreatech.ac.kr/" target="_blank" rel="noopener">한국기술교육대학교 홈페이지</a>
+        </div>
+      </form>
     </section>
   </main>
 

@@ -45,7 +45,7 @@ function parseFullPage(src, slug) {
 }
 
 function nav() {
-  return '<nav class="nav" aria-label="이동"><a href="/">홈</a><a href="/blog/">블로그</a><a href="/newsletter/">뉴스레터</a></nav>';
+  return '<nav class="nav" aria-label="이동"><a href="/">홈</a><a href="/blog/">블로그</a><a href="/newsletter/">뉴스레터</a><a href="/#contact">상담 신청</a></nav>';
 }
 
 function head({ title, description, url, type = 'article', image = SITE + '/og.png', ld = '' }, styles) {

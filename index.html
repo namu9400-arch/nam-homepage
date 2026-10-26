@@ -226,6 +226,22 @@ footer { padding-block: 32px 48px; border-top: 1px solid var(--line); display: f
       </div>
     </section>
 
+    <!-- 1-1. 30초 소개 모션 -->
+    <section class="intro-motion" aria-labelledby="intro-title">
+      <div class="head">
+        <p class="label">30초 소개</p>
+        <h2 id="intro-title">한눈에 보는 남상욱 교수</h2>
+      </div>
+      <iframe id="intro-frame" src="/intro/?embed=1" title="남상욱 교수 소개 모션 (30초, 피아노 음악)" loading="lazy" allow="autoplay" style="display:block;width:100%;border:0;aspect-ratio:16/10;background:transparent"></iframe>
+      <script>
+        addEventListener('message', function (e) {
+          if (e.origin !== location.origin || !e.data || e.data.type !== 'intro-height') return;
+          var f = document.getElementById('intro-frame');
+          f.style.aspectRatio = 'auto'; f.style.height = e.data.h + 'px';
+        });
+      </script>
+    </section>
+
     <!-- 2. 나만의 질문 -->
     <section class="question" aria-labelledby="q-title">
       <p class="label">제가 매일 붙드는 질문</p>

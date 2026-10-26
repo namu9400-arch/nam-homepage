@@ -88,6 +88,9 @@ body {
 </style>
 <style>
 [hidden] { display: none !important; }
+html, body { margin: 0; }
+html.embed { overflow: hidden; }
+html.embed #nl-badge-frame { display: none !important; }
 /* 홈페이지 삽입(embed) 모드: 제목·안내문 숨기고 여백 제거 */
 html.embed body { padding: 0; background: transparent; }
 html.embed .head, html.embed .note { display: none; }
@@ -264,7 +267,7 @@ html.embed .head, html.embed .note { display: none; }
 // 홈페이지 iframe 높이 자동 맞춤
 (() => {
   if (!document.documentElement.classList.contains('embed') || parent === window) return;
-  const send = () => parent.postMessage({ type: 'intro-height', h: Math.ceil(document.querySelector('.wrap').getBoundingClientRect().height) }, location.origin);
+  const send = () => parent.postMessage({ type: 'intro-height', h: Math.ceil(document.querySelector('.wrap').getBoundingClientRect().height) + 2 }, location.origin);
   new ResizeObserver(send).observe(document.querySelector('.wrap'));
   addEventListener('load', send);
 })();
